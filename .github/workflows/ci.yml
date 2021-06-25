@@ -74,7 +74,7 @@ jobs:
     steps:
       - name: checkout sources
         uses: actions/checkout@v2
-      - name: Prep toolchain
+      - name: prepare toolchain
         uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
@@ -95,5 +95,5 @@ jobs:
       - name: generate report with grcov
         id: coverage
         uses: actions-rs/grcov@v0.1
-      - name: Upload to codecov.io
+      - name: upload to codecov.io
         uses: codecov/codecov-action@v1
