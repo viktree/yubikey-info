@@ -15,19 +15,19 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Install stable toolchain
+      - name: install stable toolchain
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
           toolchain: stable
           override: true
           components: rustfmt, clippy
-      - uses: actions/checkout@v2
-        name: lint
+      - name: run cargo fmt
+        uses: actions/checkout@v2
         with:
           command: cargo
           args: fmt --verbose
-      - name: Run cargo clippy
+      - name: run cargo clippy
         uses: actions-rs/cargo@v1
         with:
           command: clippy
@@ -36,54 +36,54 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout sources
+      - name: checkout sources
         uses: actions/checkout@v2
-      - name: Install stable toolchain
+      - name: install stable toolchain
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
           toolchain: stable
           override: true
-      - uses: actions/checkout@v2
-        name: run tests
+      - name: run tests
+        uses: actions-rs/cargo@v1
         with:
-          command: cargo
-          args: test --verbose
+          command: test
+          args: --verbose
 
   build:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout sources
+      - name: checkout sources
         uses: actions/checkout@v2
-      - name: Install stable toolchain
+      - name: install stable toolchain
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
           toolchain: stable
           override: true
-      - uses: actions/checkout@v2
-        name: build
+      - uses: actions-rs/cargo@v1
+        name: run cargo build
         with:
-          command: cargo
-          args: build --verbose
+          command: build
+          args: --verbose
 
   codecov-grcov:
     name: Generate code coverage report
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout sources
+      - name: checkout sources
         uses: actions/checkout@v2
       - name: Prep toolchain
         uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
           override: true
-      - name: Clean workspace
+      - name: clean workspace
         uses: actions-rs/cargo@v1
         with:
           command: clean
-      - name: Run test for coverage
+      - name: run test for coverage
         uses: actions-rs/cargo@v1
         with:
           command: test
@@ -92,7 +92,7 @@ jobs:
           CARGO_INCREMENTAL: "0"
           RUSTFLAGS: "-Zprofile -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests"
           RUSTDOCFLAGS: "-Zprofile -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests"
-      - name: Generate report with grcov
+      - name: generate report with grcov
         id: coverage
         uses: actions-rs/grcov@v0.1
       - name: Upload to codecov.io
