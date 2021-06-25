@@ -47,6 +47,17 @@ mod test {
 		assert_eq!(add(1, 2), 3);
 	}
 
+	#[quickcheck]
+	fn test_add_commutative(x: i32, y: i32) -> bool {
+		if x > 500 || x < -500 {
+			return true;
+		}
+		if y > 500 || y < -500 {
+			return true;
+		}
+		add(x, y) == add(y, x)
+	}
+
 	#[test]
 	fn test_sqrt() -> Result<(), String> {
 		let x = 4.0;
