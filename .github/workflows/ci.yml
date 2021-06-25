@@ -74,6 +74,11 @@ jobs:
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
+      - name: Prep toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          override: true
       - name: Clean workspace
         uses: actions-rs/cargo@v1
         with:
