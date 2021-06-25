@@ -70,9 +70,8 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
       - name: Generate code coverage
+        uses: actions/checkout@v2
         with:
           command: cargo
           args: tarpaulin --verbose --all-features --workspace--out Xml
