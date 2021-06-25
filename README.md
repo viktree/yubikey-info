@@ -1,5 +1,7 @@
 # Yubikey Info
 
+[![Coverage Status](https://coveralls.io/repos/github/viktree/yubikey-info/badge.svg?branch=main)](https://coveralls.io/github/viktree/yubikey-info?branch=main)
+
 yubikey-info is a rust package
 
 ## Installation
