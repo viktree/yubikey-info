@@ -71,9 +71,10 @@ jobs:
     name: Generate code coverage
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: hecrj/setup-rust-action@v1
+      - name: Checkout sources
+        uses: actions/checkout@v2
       - name: Run test for coverage
+        uses: hecrj/setup-rust-action@v1
         env:
           CARGO_INCREMENTAL: 0
           RUSTFLAGS: -Zprofile -Ccodegen-units=1 -Copt-level=0 -Clink-dead-code -Coverflow-checks=off -Zpanic_abort_tests -Cpanic=abort
