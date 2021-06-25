@@ -1,0 +1,67 @@
+name: Rust
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+          components: rustfmt, clippy
+      - uses: actions/checkout@v2
+        name: lint
+        with:
+            command: cargo
+            args: fmt --verbose
+      - name: Run cargo clippy
+        uses: actions-rs/cargo@v1
+        with:
+            command: clippy
+            args: -- -D warnings
+      
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+      - uses: actions/checkout@v2
+        name: run tests
+        with: 
+          command: cargo 
+          args: test --verbose
+  
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+      - uses: actions/checkout@v2
+        name: build
+        with: 
+          command: cargo 
+          args: build --verbose
