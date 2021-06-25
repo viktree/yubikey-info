@@ -18,16 +18,16 @@ fn sqrt(number: f64) -> Result<f64, String> {
 	}
 }
 
+// COVERAGE_IGNORE_BLOCK_START
 fn main() {
-	// GCOVR_EXCL_START
 	add(1, 2);
 	let lst = [1, 2, 3];
 	reverse(&lst);
 	let res = sqrt(9.0);
 	println!("Hello World!");
 	println!("{:?}", res);
-	// GCOVR_EXCL_STOP
 }
+// COVERAGE_IGNORE_BLOCK_STOP
 
 #[cfg(test)]
 mod test {
