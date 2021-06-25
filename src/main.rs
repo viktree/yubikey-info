@@ -7,7 +7,7 @@ fn reverse<T: Clone>(xs: &[T]) -> Vec<T> {
 }
 
 pub fn add(x: i32, y: i32) -> i32 {
-	return x + y;
+	x + y;
 }
 
 fn sqrt(number: f64) -> Result<f64, String> {
