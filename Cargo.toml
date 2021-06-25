@@ -1,0 +1,18 @@
+[package]
+name = "yubikey-info"
+version = "0.1.0"
+authors = ["Vikram Venkataranan <vikram.venkataramanan@mail.utoronto.ca>"]
+edition = "2018"
+
+# [dependencies]
+
+[dev-dependencies]
+quickcheck = "1"
+quickcheck_macros = "1"
+pretty_assertions = "0.7.2"
+# assert_cmd = "1.0.4"
+# serial_test = "0.5.1"
+# predicates = "1.0.7"
+# wait-timeout = "0.2.0"
+# tempfile = "3.2.0"
+
