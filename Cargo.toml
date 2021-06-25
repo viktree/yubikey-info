@@ -15,4 +15,6 @@ pretty_assertions = "0.7.2"
 # predicates = "1.0.7"
 # wait-timeout = "0.2.0"
 # tempfile = "3.2.0"
+# httpmock = "0.5"
+# faux = "0.1.3"
 

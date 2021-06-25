@@ -95,5 +95,9 @@ jobs:
       - name: generate report with grcov
         id: coverage
         uses: actions-rs/grcov@v0.1
+        with:
+          command: grcov
+          config: .github/actions-rs/grcov.yml
+          args: --excl-start COVERAGE_IGNORE_BLOCK_START --excl-stop COVERAGE_IGNORE_BLOCK_STOP
       - name: upload to codecov.io
         uses: codecov/codecov-action@v1
