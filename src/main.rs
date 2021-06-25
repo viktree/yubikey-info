@@ -19,12 +19,14 @@ fn sqrt(number: f64) -> Result<f64, String> {
 }
 
 fn main() {
+	// GCOVR_EXCL_START
 	add(1, 2);
 	let lst = [1, 2, 3];
 	reverse(&lst);
 	let res = sqrt(9.0);
 	println!("Hello World!");
 	println!("{:?}", res);
+	// GCOVR_EXCL_STOP
 }
 
 #[cfg(test)]
@@ -39,7 +41,6 @@ mod test {
 	}
 
 	#[test]
-	#[ignore]
 	fn test_sqrt() -> Result<(), String> {
 		let x = 4.0;
 		assert_eq!(sqrt(x)?.powf(2.0), x);
