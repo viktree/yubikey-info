@@ -10,6 +10,10 @@ pub fn add(x: i32, y: i32) -> i32 {
 	x + y
 }
 
+fn get_string() -> String {
+	"Hello World".to_string()
+}
+
 fn sqrt(number: f64) -> Result<f64, String> {
 	if number >= 0.0 {
 		Ok(number.powf(0.5))
@@ -20,18 +24,21 @@ fn sqrt(number: f64) -> Result<f64, String> {
 
 // COVERAGE_IGNORE_BLOCK_START
 fn main() {
+	let res_string = get_string();
 	add(1, 2);
 	let lst = [1, 2, 3];
 	reverse(&lst);
 	let res = sqrt(9.0);
 	println!("Hello World!");
 	println!("{:?}", res);
+	println!("{:?}", res_string);
 }
 // COVERAGE_IGNORE_BLOCK_STOP
 
 #[cfg(test)]
 mod test {
 	use super::*;
+	use insta::assert_snapshot;
 	use pretty_assertions::assert_eq;
 	use quickcheck_macros::quickcheck;
 
@@ -45,6 +52,11 @@ mod test {
 		let x = 4.0;
 		assert_eq!(sqrt(x)?.powf(2.0), x);
 		Ok(())
+	}
+
+	#[test]
+	fn snapshot_get_string() {
+		assert_snapshot!(get_string());
 	}
 
 	#[quickcheck]
